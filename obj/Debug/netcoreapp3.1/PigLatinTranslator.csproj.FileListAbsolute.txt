@@ -1,0 +1,13 @@
+C:\Users\17dor\Desktop\GC Slns\PigLatin\PigLatinTranslator\obj\Debug\netcoreapp3.1\PigLatinTranslator.csprojAssemblyReference.cache
+C:\Users\17dor\Desktop\GC Slns\PigLatin\PigLatinTranslator\obj\Debug\netcoreapp3.1\PigLatinTranslator.AssemblyInfoInputs.cache
+C:\Users\17dor\Desktop\GC Slns\PigLatin\PigLatinTranslator\obj\Debug\netcoreapp3.1\PigLatinTranslator.AssemblyInfo.cs
+C:\Users\17dor\Desktop\GC Slns\PigLatin\PigLatinTranslator\obj\Debug\netcoreapp3.1\PigLatinTranslator.csproj.CoreCompileInputs.cache
+C:\Users\17dor\Desktop\GC Slns\PigLatin\PigLatinTranslator\bin\Debug\netcoreapp3.1\PigLatinTranslator.exe
+C:\Users\17dor\Desktop\GC Slns\PigLatin\PigLatinTranslator\bin\Debug\netcoreapp3.1\PigLatinTranslator.deps.json
+C:\Users\17dor\Desktop\GC Slns\PigLatin\PigLatinTranslator\bin\Debug\netcoreapp3.1\PigLatinTranslator.runtimeconfig.json
+C:\Users\17dor\Desktop\GC Slns\PigLatin\PigLatinTranslator\bin\Debug\netcoreapp3.1\PigLatinTranslator.runtimeconfig.dev.json
+C:\Users\17dor\Desktop\GC Slns\PigLatin\PigLatinTranslator\bin\Debug\netcoreapp3.1\PigLatinTranslator.dll
+C:\Users\17dor\Desktop\GC Slns\PigLatin\PigLatinTranslator\bin\Debug\netcoreapp3.1\PigLatinTranslator.pdb
+C:\Users\17dor\Desktop\GC Slns\PigLatin\PigLatinTranslator\obj\Debug\netcoreapp3.1\PigLatinTranslator.dll
+C:\Users\17dor\Desktop\GC Slns\PigLatin\PigLatinTranslator\obj\Debug\netcoreapp3.1\PigLatinTranslator.pdb
+C:\Users\17dor\Desktop\GC Slns\PigLatin\PigLatinTranslator\obj\Debug\netcoreapp3.1\PigLatinTranslator.genruntimeconfig.cache
