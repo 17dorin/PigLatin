@@ -5,7 +5,7 @@ namespace PigLatinTranslator
 {
     class Program
     {
-        private static char[] vowels = new char[] { 'a', 'e', 'i', 'o', 'u' };
+        private static char[] vowels = new char[] { 'a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U'};
         private static char[] punctuation = new char[] { '!', ',', '.', '?', ':', ';' };
 
         static void Main(string[] args)
@@ -17,9 +17,10 @@ namespace PigLatinTranslator
 
             while (askAgain)
             {
-                //TODO add logic to clear userInput string on every fresh run when program is finished
+                userInput = null;
+                //Above line resets user input for each run
 
-                Console.WriteLine("Please enter the word or phrase you want to translate");
+                Console.WriteLine("Please enter the word or sentence you want to translate");
                 userInput = ValidateInput(Console.ReadLine());
 
                 if (userInput != null)
@@ -30,14 +31,17 @@ namespace PigLatinTranslator
                 {
                     Console.WriteLine("Invalid input, cannot be blank");
                 }
-                Console.WriteLine(Translator(userInput));
+
+
             }
+            Console.WriteLine(Translate(userInput));
 
         }
 
+        //Validates input and trims excess whitespace
         public static string ValidateInput(string input)
         {
-            if (input.Trim() != null && input.Trim() != "")
+            if (!string.IsNullOrWhiteSpace(input))
             {
                 return input.Trim();
             }
@@ -48,7 +52,7 @@ namespace PigLatinTranslator
         }
 
         //Note: not used in main, used in the Translate method
-        //Also need to add logic to check if word starts with a vowel or not
+        //Checks a variety of punctuation an capitalization cases and outputs a word in the desired format
         public static string Translator(string input)
         {
             string consonants;
@@ -67,14 +71,28 @@ namespace PigLatinTranslator
             {
                 if(input.IndexOfAny(vowels) == 0)
                 {
-                    remaining = input.Substring(0, input.Length - 1);
-                    return $"{remaining}way{punct}";
+                    if(input.Any(char.IsLower) == false)
+                    {
+                        remaining = input.Substring(input.Length - 1);
+                        return $"{input}WAY{punct}";
+                    }
+                    else
+                    {
+                        remaining = input.Substring(input.Length - 1);
+                        return $"{input}way{punct}";
+                    }
                 }
-                else if(input.IndexOfAny(vowels) != -1)
+                else if(input.IndexOfAny(vowels) != -1 && input.Any(char.IsLower))
                 {
                     consonants = input.Substring(0, input.IndexOfAny(vowels));
                     remaining = input.Substring(input.IndexOfAny(vowels), noPunct.Length - consonants.Length);
                     return  $"{remaining}{consonants}ay{punct}";
+                }
+                else if(input.IndexOfAny(vowels) != -1 && input.Any(char.IsLower) == false)
+                {
+                    consonants = input.Substring(0, input.IndexOfAny(vowels));
+                    remaining = input.Substring(input.IndexOfAny(vowels), noPunct.Length - consonants.Length);
+                    return $"{remaining}{consonants}AY{punct}";
                 }
                 else
                 {
@@ -84,55 +102,75 @@ namespace PigLatinTranslator
 
         }
 
-        public static string[] Translate(string input)
+        //Main translation method, implements other methods created in program
+        public static string Translate(string input)
         {
+            string output;
             string[] untranslated = input.Split();
-            string[] translated = new string[input.Length];
-            return null;
+            string[] translated = new string[untranslated.Length];
+            int i = 0;
+
+            foreach (string word in untranslated)
+            {
+                string caseInsensitive = Translator(untranslated[i]);
+                translated[i] = SaveUpper(untranslated[i], caseInsensitive);
+                i++;
+            }
+            output = String.Join(" ", translated);
+            return output;
         }
 
+        //Checks each character in a translated string for capitalization vs the base input string
+        //Implemented in Translate()
         public static string SaveUpper(string input, string translatedInput)
         {
-            char[] inputString = input.ToCharArray();
             char[] translatedString = translatedInput.ToCharArray();
 
-            return "";
+            for(int i = 0; i < input.Length; i++)
+            {
+                if (char.IsUpper(input[i]))
+                {
+                   translatedString[i] = char.ToUpper(translatedString[i]);
+                }
+                else if (char.IsLower(input[i]))
+                {
+                    translatedString[i] = char.ToLower(translatedString[i]);
+                }
+            }
+
+
+            return string.Join("", translatedString);
         }
 
-        //Checks the IsPunctuation method agains my array of allowed punctuation, and if there is NO valid punctuation at the end of the string
-        //TODO add logic to allow apostrophes and ignore other symbols in the middle of strings
+        //Checks the IsPunctuation method against my array of allowed punctuation, and if there is NO valid punctuation at the end of the string
+        //Implemented in Translate()
         public static string CheckPunctuation(string input, out bool translate)
         {
             translate = true;
             int i = 0;
             char[] letters = input.ToCharArray();
 
-            if()
-            foreach(char letter in letters)
+            foreach(char letter in input)
             {
-
-            }
-
-            //Checks for any punctuation, symbols, or digits
-
-            /*if(input.Any(char.IsPunctuation))
-            {
-                //If there's punctuation, checks for allowed punctuation at end of sentence.
-                //If true, parses punctuation. If false, returns empty string and halts translation
-                if (input.IndexOfAny(punctuation) == input.Length - 1)
-                {
-                    return input.Substring(input.IndexOfAny(punctuation));
-                }
-                else if (input.)
+                if (char.IsSymbol(letter) || char.IsDigit(letter) || (char.IsPunctuation(letter) && letter != '\'' && punctuation.Contains(letter) == false))
                 {
                     translate = false;
-                    return "";
+                } 
+                else if (input.IndexOfAny(punctuation) != -1 && input.IndexOfAny(punctuation) != input.Length -1)
+                {
+                    translate = false;
                 }
+                i++;
             }
-            else if (input.Any())
+
+            if (punctuation.Contains(input[input.Length - 1]) && translate)
+            {
+                return input[input.Length - 1].ToString();
+            }
+            else
             {
                 return "";
-            }*/
+            }
         }
 
     }
