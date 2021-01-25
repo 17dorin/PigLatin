@@ -11,30 +11,45 @@ namespace PigLatinTranslator
         static void Main(string[] args)
         {
             string userInput = null;
-            bool askAgain = true;
+            bool askAgain;
+            bool translateAgain = true;
 
             Console.WriteLine("Welcome to the Pig Latin Translator.");
 
-            while (askAgain)
+            while (translateAgain)
             {
-                userInput = null;
-                //Above line resets user input for each run
-
-                Console.WriteLine("Please enter the word or sentence you want to translate");
-                userInput = ValidateInput(Console.ReadLine());
-
-                if (userInput != null)
+                askAgain = true;
+                while (askAgain)
                 {
-                    askAgain = false;
+
+                    Console.WriteLine("Please enter the word or sentence you want to translate");
+                    userInput = ValidateInput(Console.ReadLine());
+
+                    if (userInput != null)
+                    {
+                        askAgain = false;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid input, cannot be blank");
+                    }
+
+                }
+
+                Console.WriteLine(Translate(userInput));
+
+                Console.WriteLine("Translate again? (y/n)");
+                if (Console.ReadLine().ToLower() == "y")
+                {
+                    Console.Clear();
                 }
                 else
                 {
-                    Console.WriteLine("Invalid input, cannot be blank");
+                    translateAgain = false;
                 }
 
 
             }
-            Console.WriteLine(Translate(userInput));
 
         }
 
